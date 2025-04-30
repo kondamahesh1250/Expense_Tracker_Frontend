@@ -48,6 +48,7 @@ const RegisterPage = () => {
       setTimeout(() => {
         navigate("/login");
         toast.success(data.message);
+        setFormData("");
       }, 2000);
       
     } catch (error) {

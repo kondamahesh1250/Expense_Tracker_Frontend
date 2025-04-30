@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from "./img.png";
 
 const Navbar = ({ user, onLogout}) => {
   const location = useLocation();
@@ -39,7 +40,10 @@ const Navbar = ({ user, onLogout}) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+      <div className='d-flex align-items-center gap-1'>
+      <img src={logo} alt=" " width={"22px"} height={"30px"}/>
       <Link className="navbar-brand" to="/" onClick={closeNavbar}>Expense Tracker</Link>
+      </div>
 
       <button
         className="navbar-toggler"

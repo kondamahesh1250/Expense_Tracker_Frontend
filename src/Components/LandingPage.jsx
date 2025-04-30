@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LandingPage = ({closeHomeButton}) => {
+const LandingPage = () => {
   return (
     <div>
       {/* Hero Section */}
