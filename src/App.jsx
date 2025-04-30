@@ -13,14 +13,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [user, setUser] = useState();
-  
   const navigate = useNavigate();
+
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
       if (token) {
-        const { data } = await axios.get("http://localhost:3005/api/get-user", {
+        const { data } = await axios.get(`${apiUrl}/api/verifyuser`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

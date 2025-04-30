@@ -10,8 +10,9 @@ const LoginPage = ({onLoginSuccess}) => {
         email: '',
         password: '',
     });
-
     const navigate = useNavigate();
+
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +27,7 @@ const LoginPage = ({onLoginSuccess}) => {
 
     const fetchUser = async () => {
         try {
-            const { data } = await axios.post("http://localhost:3005/api/login", formData);
+            const { data } = await axios.post(`${apiUrl}/api/login`, formData);
             if (data.token) {
                 localStorage.setItem("token", data.token);
                 setTimeout(() => {

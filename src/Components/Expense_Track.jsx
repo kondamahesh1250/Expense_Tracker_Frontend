@@ -12,8 +12,9 @@ const Expense_Track = () => {
     description: '',
     date: ''
   });
-
   const navigate = useNavigate();
+  
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,7 +27,7 @@ const Expense_Track = () => {
   const expenseTrack = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:3005/api/expenses", {
+      const { data } = await axios.get(`${apiUrl}/api/expenses`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -58,7 +59,7 @@ const Expense_Track = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.post("http://localhost:3005/api/expenses", datainfo, {
+      const { data } = await axios.post(`${apiUrl}/api/expenses`, datainfo, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -85,7 +86,7 @@ const Expense_Track = () => {
 
   const handleUpdate = async () => {
     try {
-      const { data } = await axios.put(`http://localhost:3005/api/expenses/${datainfo._id}`, datainfo, {
+      const { data } = await axios.put(`${apiUrl}/api/expenses/${datainfo._id}`, datainfo, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -100,7 +101,7 @@ const Expense_Track = () => {
 
   const handleDelete = async () => {
     try {
-      const { data } = await axios.delete(`http://localhost:3005/api/expenses/${datainfo._id}`, {
+      const { data } = await axios.delete(`${apiUrl}/api/expenses/${datainfo._id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

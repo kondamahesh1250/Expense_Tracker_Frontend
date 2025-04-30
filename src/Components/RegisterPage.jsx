@@ -10,8 +10,9 @@ const RegisterPage = () => {
     password: '',
     confirmPassword: '',
   });
-
   const navigate = useNavigate();
+  
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -43,7 +44,7 @@ const RegisterPage = () => {
 
   
     try {
-      const { data } = await axios.post("http://localhost:3005/api/register", userData);
+      const { data } = await axios.post(`${apiUrl}/api/register`, userData);
       setTimeout(() => {
         navigate("/login");
         toast.success(data.message);

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = ({ user, onLogout, close, closeHomeButton }) => {
+const Navbar = ({ user, onLogout}) => {
   const location = useLocation();
   const collapseRef = useRef();
 
