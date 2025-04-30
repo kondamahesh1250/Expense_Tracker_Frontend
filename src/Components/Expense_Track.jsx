@@ -1,17 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import Piecharts from './Piecharts';
 import { useNavigate } from 'react-router-dom';
 
 const Expense_Track = () => {
   const [expense, setExpense] = useState([]);
   const [balance, setBalance] = useState(0);
-  const [datainfo, setData] = useState({
-    amount: 0,
+  const [userData, setUserData] = useState({
+    amount: '',
     category: '',
     description: '',
     date: ''
   });
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -26,7 +27,6 @@ const Expense_Track = () => {
 
   const expenseTrack = async () => {
     try {
-      const token = localStorage.getItem("token");
       const { data } = await axios.get(`${apiUrl}/api/expenses`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -58,8 +58,7 @@ const Expense_Track = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      const { data } = await axios.post(`${apiUrl}/api/expenses`, datainfo, {
+      const { data } = await axios.post(`${apiUrl}/api/expenses`, userData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -74,19 +73,19 @@ const Expense_Track = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({
+    setUserData((prev) => ({
       ...prev,
       [name]: value
     }))
   }
 
   const handleModify = (item) => {
-    setData(item);
+    setUserData(item);
   }
 
   const handleUpdate = async () => {
     try {
-      const { data } = await axios.put(`${apiUrl}/api/expenses/${datainfo._id}`, datainfo, {
+      const { data } = await axios.put(`${apiUrl}/api/expenses/${userData._id}`, userData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -101,7 +100,7 @@ const Expense_Track = () => {
 
   const handleDelete = async () => {
     try {
-      const { data } = await axios.delete(`${apiUrl}/api/expenses/${datainfo._id}`, {
+      const { data } = await axios.delete(`${apiUrl}/api/expenses/${userData._id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -123,13 +122,13 @@ const Expense_Track = () => {
           <form onSubmit={handleSubmit} className='p-4'>
             <div className="mb-3">
               <label htmlFor="amount" className="form-label">Amount</label>
-              <input type="number" name="amount" id="amount" className="form-control" onChange={handleChange} />
+              <input type="number" name="amount" id="amount" className="form-control" value={userData.amount} onChange={handleChange} />
             </div>
 
             <div className="mb-3">
               <label htmlFor="category" className="form-label">Category</label>
-              <select name="category" id="category" className="form-select" onChange={handleChange}>
-                <option value="select" disabled>Select</option>
+              <select name="category" id="category" className="form-select" value={userData.category} onChange={handleChange}>
+                <option value="select">Select</option>
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
               </select>
@@ -137,12 +136,12 @@ const Expense_Track = () => {
 
             <div className="mb-3">
               <label htmlFor="description" className="form-label">Description</label>
-              <input type="text" name="description" id="description" className="form-control" onChange={handleChange} />
+              <input type="text" name="description" id="description" className="form-control" value={userData.description} onChange={handleChange} />
             </div>
 
             <div className="mb-5">
               <label htmlFor="date" className="form-label">Date</label>
-              <input type="date" name="date" id="date" className="form-control" onChange={handleChange} />
+              <input type="date" name="date" id="date" className="form-control" value={userData.date} onChange={handleChange} />
             </div>
 
             <button type="submit" className="btn btn-primary w-100">Add Data</button>
@@ -207,12 +206,12 @@ const Expense_Track = () => {
               <form>
                 <div className="mb-3">
                   <label htmlFor="amount" className="form-label">Amount</label>
-                  <input type="number" name="amount" id="amount" className="form-control" onChange={handleChange} value={datainfo.amount} />
+                  <input type="number" name="amount" id="amount" className="form-control" onChange={handleChange} value={userData.amount} />
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="category" className="form-label">Category</label>
-                  <select name="category" id="category" className="form-select" onChange={handleChange} value={datainfo.category}>
+                  <select name="category" id="category" className="form-select" onChange={handleChange} value={userData.category}>
                     <option value="select">Select</option>
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
@@ -221,12 +220,12 @@ const Expense_Track = () => {
 
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label">Description</label>
-                  <input type="text" name="description" id="description" className="form-control" onChange={handleChange} value={datainfo.description} />
+                  <input type="text" name="description" id="description" className="form-control" onChange={handleChange} value={userData.description} />
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="date" className="form-label">Date</label>
-                  <input type="date" name="date" id="date" className="form-control" onChange={handleChange} value={datainfo.date} />
+                  <input type="date" name="date" id="date" className="form-control" onChange={handleChange} value={userData.date} />
                 </div>
               </form>
             </div>
