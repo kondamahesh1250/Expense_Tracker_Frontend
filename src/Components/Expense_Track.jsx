@@ -120,7 +120,7 @@ const Expense_Track = () => {
   }
 
   return (
-    <div className="container-fluid my-0 bg-light p-4 rounded-3 min-vh-100">
+    <div className="container-fluid my-0 bg-light p-4 rounded-3 min-vh-100 ">
       <div className="row">
         <div className="col-md-6 col-lg-6 mt-5">
           <h3 className='text-center'>Total Balance: <span>₹</span>{balance}</h3>
