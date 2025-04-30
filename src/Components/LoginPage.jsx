@@ -52,7 +52,6 @@ const LoginPage = ({onLoginSuccess}) => {
           return alert("All fields are required");
         }
         fetchUser();
-        console.log(formData)
     };
 
     return (
