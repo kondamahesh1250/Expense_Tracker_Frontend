@@ -32,7 +32,10 @@ const LoginPage = ({onLoginSuccess}) => {
                     navigate("/data");
                     onLoginSuccess();
                     toast.success("Login successful!");
-                    setFormData("");
+                    setFormData({
+                        email: '',
+                        password: '',
+                    });
                 }, 2000);
 
             } else {

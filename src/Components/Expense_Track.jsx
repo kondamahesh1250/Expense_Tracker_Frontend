@@ -64,6 +64,12 @@ const Expense_Track = () => {
         }
       });
       if (data) {
+        setUserData({
+          amount: '',
+          category: '',
+          description: '',
+          date: ''
+        });
         expenseTrack();
       }
     } catch (error) {

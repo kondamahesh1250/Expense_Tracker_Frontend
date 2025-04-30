@@ -48,7 +48,10 @@ const RegisterPage = () => {
       setTimeout(() => {
         navigate("/login");
         toast.success(data.message);
-        setFormData("");
+        setFormData({
+          email: '',
+          password: '',
+      });
       }, 2000);
       
     } catch (error) {
