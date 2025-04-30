@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
-
 const LoginPage = ({onLoginSuccess}) => {
     const [formData, setFormData] = useState({
         email: '',
@@ -34,6 +32,7 @@ const LoginPage = ({onLoginSuccess}) => {
                     navigate("/data");
                     onLoginSuccess();
                     toast.success("Login successful!");
+                    setFormData("");
                 }, 2000);
 
             } else {
